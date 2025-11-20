@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: http://10.96.89.72:8080; connect-src 'self' http://10.96.89.72:8080;"> -->
+    
+     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: http://localhost:8080 http://10.96.89.72:5500; connect-src 'self' http://localhost:8080;"> -->
+    <title>Contacts</title>
+    <link rel="stylesheet" href="contacts.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Contacts</h1>
+            <div class="header-actions">
+                <button class="btn-icon" id="searchToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                <button class="btn-icon" id="logoutBtn" title="Logout">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="search-bar" id="searchBar">
+            <input type="text" id="searchInput" placeholder="Search contacts...">
+        </div>
+    </header>
+
+    <!-- Alphabet Index -->
+    <div class="alphabet-index" id="alphabetIndex">
+        <div class="alphabet-scroll">
+            <span data-letter="A">A</span>
+            <span data-letter="B">B</span>
+            <span data-letter="C">C</span>
+            <span data-letter="D">D</span>
+            <span data-letter="E">E</span>
+            <span data-letter="F">F</span>
+            <span data-letter="G">G</span>
+            <span data-letter="H">H</span>
+            <span data-letter="I">I</span>
+            <span data-letter="J">J</span>
+            <span data-letter="K">K</span>
+            <span data-letter="L">L</span>
+            <span data-letter="M">M</span>
+            <span data-letter="N">N</span>
+            <span data-letter="O">O</span>
+            <span data-letter="P">P</span>
+            <span data-letter="Q">Q</span>
+            <span data-letter="R">R</span>
+            <span data-letter="S">S</span>
+            <span data-letter="T">T</span>
+            <span data-letter="U">U</span>
+            <span data-letter="V">V</span>
+            <span data-letter="W">W</span>
+            <span data-letter="X">X</span>
+            <span data-letter="Y">Y</span>
+            <span data-letter="Z">Z</span>
+            <span data-letter="#">#</span>
+        </div>
+    </div>
+
+    <!-- Contacts List -->
+    <div class="contacts-container">
+        <div id="contactsList" class="contacts-list"></div>
+        <div id="emptyState" class="empty-state">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h3>No Contacts Yet</h3>
+            <p>Add your first contact to get started</p>
+        </div>
+    </div>
+
+    <!-- Add Contact Button -->
+    <button class="fab" id="addContactBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </button>
+
+    <!-- Add/Edit Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Contact</h2>
+                <button class="btn-close" id="closeModal">&times;</button>
+            </div>
+            <form id="contactForm">
+                <div class="photo-upload">
+                    <div class="photo-preview" id="photoPreview">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                    <button type="button" class="btn-upload" id="uploadPhotoBtn">Upload Photo</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactName">Name *</label>
+                    <input type="text" id="contactName" required placeholder="Enter name">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactPhone">Phone Number *</label>
+                    <input type="tel" id="contactPhone" required placeholder="Enter phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmail">Email</label>
+                    <input type="email" id="contactEmail" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactGender">Gender</label>
+                    <select id="contactGender">
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">Save Contact</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Details Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Contact Details</h2>
+                <button class="btn-close" id="closeDetailsModal">&times;</button>
+            </div>
+            <div class="contact-details" id="contactDetails"></div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-danger" id="deleteContactBtn">Delete</button>
+                <button type="button" class="btn btn-primary" id="editContactBtn">Edit</button>
+            </div>
+        </div>
+    </div>
+      <script src="auth.js"></script>
+    <script src="config.js"></script>
+    <script src="contacts.js"></script>
+  
+</body>
+</html>

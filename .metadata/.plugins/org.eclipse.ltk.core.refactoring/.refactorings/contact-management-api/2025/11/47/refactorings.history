@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.contactapp.config.webCnf5g.java&apos; to &apos;WebConfig.java&apos;&#x0D;&#x0A;- Original project: &apos;contact-management-api&apos;&#x0D;&#x0A;- Original element: &apos;com.contactapp.config.webCnf5g.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.contactapp.config.WebConfig.java&apos;" description="Rename compilation unit &apos;webCnf5g.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.contactapp.config{webCnf5g.java" name="WebConfig.java" references="false" stamp="1763520395010" version="1.0"/>
+</session>
