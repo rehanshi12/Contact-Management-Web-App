@@ -4,14 +4,18 @@ public class UserDto {
     private Long id;
     private String username;
     private String email;
+//    private String securityQuestion;
+//    private String securityAnswer;   ///here new code 
 
     // Constructors
     public UserDto() {}
 
-    public UserDto(Long id, String username, String email) {
+    public UserDto(Long id, String username, String email) {  ///herenew code
         this.id = id;
         this.username = username;
         this.email = email;
+//        this.securityQuestion = securityQuestion;/////here new 
+//        this.securityAnswer = securityAnswer;	////
     }
 
     // Getters and Setters
@@ -23,4 +27,25 @@ public class UserDto {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+    
+    
+    
+    
+//  /here addd recent code  
+    
+    
+    
+//  /here addd recent code   
+    
+//    public String getSecurityQuestion() { return securityQuestion;}
+//    
+//    public void setSecurityQuestion(String securityQuestion) {this.securityQuestion = securityQuestion;}
+//    
+//    public String getSecurityAnswer() {  return securityAnswer;}
+//    
+//    public void setSecurityAnswer(String securityAnswer) { this.securityAnswer = securityAnswer;}
+    
+    
+    
+    
 }

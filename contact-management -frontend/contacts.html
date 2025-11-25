@@ -1,14 +1,19 @@
+<!-- contact.html -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: http://10.96.89.72:8080; connect-src 'self' http://10.96.89.72:8080;"> -->
-    
-     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: http://localhost:8080 http://10.96.89.72:5500; connect-src 'self' http://localhost:8080;"> -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: http://10.96.89.72:8080; font-src 'self' data:; connect-src 'self' http://10.96.89.72:8080;">
+
+
     <title>Contacts</title>
     <link rel="stylesheet" href="contacts.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -101,7 +106,8 @@
             <form id="contactForm">
                 <div class="photo-upload">
                     <div class="photo-preview" id="photoPreview">
-                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
@@ -157,9 +163,10 @@
             </div>
         </div>
     </div>
-      <script src="auth.js"></script>
+    <script src="auth.js"></script>
     <script src="config.js"></script>
     <script src="contacts.js"></script>
-  
+
 </body>
+
 </html>

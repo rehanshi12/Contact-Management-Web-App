@@ -26,7 +26,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/contacts")
-//@CrossOrigin(origins = "*")
 public class ContactController {
 
 	@Autowired

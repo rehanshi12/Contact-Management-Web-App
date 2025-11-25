@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.contactapp.dto.AuthRequest;
-import com.contactapp.dto.ForgotPasswordRequest;
-import com.contactapp.dto.ResetPasswordRequest;
 import com.contactapp.dto.UserDto;
 import com.contactapp.entity.User;
+import com.contactapp.repository.UserRepository;
 import com.contactapp.service.AuthService;
 import com.contactapp.service.JwtService;
 
@@ -24,15 +25,28 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
+
+
 //@CrossOrigin(origins = "*")
+
+
 public class AuthController
 {
 
 					@Autowired
     				private AuthService authService;
+					
+				
 
+				
 					@Autowired
 					private JwtService jwtService;
+					
+
+					private UserRepository userRepository;
+					
+					//@Autowired
+//					private PasswordEncoder passwordEncoder;
 
 					@PostMapping("/signup")
 					public ResponseEntity<?> signup(@Valid @RequestBody AuthRequest request)
@@ -78,53 +92,137 @@ public class AuthController
 							return ResponseEntity.badRequest().body(error);
 						}
 					}
-
-//					@PostMapping("/forgot-password")
-//					public ResponseEntity<?> forgetPassword(@RequestBody ForgotPasswordRequest request)
-//					{
-//						try
-//						{
-//							String resetToken = authService.generateResetToken(request.getEmail());
-//
-//				            // Build the reset URL
-//				            String resetUrl = "http://10.96.89.72:5500/index.html?token=" + resetToken;
-//
-//				            Map<String, Object> response = new HashMap<>();
-//				            response.put("success", true);
-//				            response.put("message", "Password reset link generated successfully");
-//				            response.put("resetToken", resetToken);
-//				            response.put("resetUrl", resetUrl);
-//				            response.put("instructions", "Copy the resetUrl and open it in a new browser tab to reset your password");
-//
-//					            // Log to console for backup
-//					            System.out.println("\n" + "=".repeat(60));
-//					            System.out.println("PASSWORD RESET REQUEST");
-//					            System.out.println("Email: " + request.getEmail());
-//					            System.out.println("Reset URL: " + resetUrl);
-//					            System.out.println("Token expires in 15 minutes");
-//					            System.out.println("=".repeat(60) + "\n");
-//
-//					            return ResponseEntity.ok(response);
-//						}
-//						catch (Exception e)
-//						{
-//					            Map<String, String> error = new HashMap<>();
-//					            error.put("error", e.getMessage());
-//					            return ResponseEntity.badRequest().body(error);
+					
+//					
+//					public User verifySecurityAnswer(String username, String answer) {
+//					    System.out.println("🔐 Verifying security answer for: " + username);
+//					    
+//					    User user = userRepository.findByUsername(username)
+//					        .orElseThrow(() -> new RuntimeException("User not found"));
+//					    
+//					    if(!user.getSecurityAnswer().equals(answer.toLowerCase())) {
+//					        throw new RuntimeException("Security answer is incorrect");
+//					    }
+//					    
+//					    System.out.println("✅ Security answer verified successfully");
+//					    return user;
+//					}
+//					
+				
+//					
+//					@PostMapping("/verify-security-answer")
+//					public ResponseEntity<?> verifySecurityAnswer(@Valid @RequestBody VerifySecurityRequest request) {
+//					    try {
+//					        System.out.println("🔐 CONTROLLER: Verify security answer for: " + request.getUsername());
+//					        User user = authService.verifySecurityAnswer(request.getUsername(), request.getAnswer());
+//					        
+//					        String token = jwtService.generateToken(user.getUsername());
+//					        Map<String, Object> response = new HashMap<>();
+//					        response.put("token", token);
+//					        response.put("message", "Security answer verified. You can now reset password.");
+//					        return ResponseEntity.ok(response);
+//					    } catch (Exception e) {
+//					        System.err.println("🔐 CONTROLLER ERROR: " + e.getMessage());
+//					        Map<String, String> error = new HashMap<>();
+//					        error.put("error", e.getMessage());
+//					        return ResponseEntity.badRequest().body(error);
 //					    }
 //					}
 
-//						@PostMapping("/reset-password")
-//						public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest request)
-//						{
+					
+					
+//					@PostMapping("/get-security-question")
+//					public ResponseEntity<?> getSecurityQuestion(@Valid @RequestBody UsernameRequest request) {
+//					    try {
+//					        System.out.println("🔐 CONTROLLER: Get security question for: " + request.getUsername());
+//					        User user = userRepository.findByUsername(request.getUsername())
+//					            .orElseThrow(() -> new RuntimeException("User not found"));
+//					        
+//					        Map<String, Object> response = new HashMap<>();
+//					        response.put("securityQuestion", user.getSecurityQuestion());
+//					        return ResponseEntity.ok(response);
+//					    } catch (Exception e) {
+//					        System.err.println("🔐 CONTROLLER ERROR: " + e.getMessage());
+//					        Map<String, String> error = new HashMap<>();
+//					        error.put("error", e.getMessage());
+//					        return ResponseEntity.badRequest().body(error);
+//					    }
+//					}
+
+					
+//					@PostMapping("/reset-password-with-auth")
+//					public ResponseEntity<?> resetPasswordWithAuth(@Valid @RequestBody ResetPasswordWithAuthRequest request) {
+//					    try {
+//					        System.out.println("🔐 CONTROLLER: Reset password for: " + request.getUsername());
+//					        User user = userRepository.findByUsername(request.getUsername())
+//					            .orElseThrow(() -> new RuntimeException("User not found"));
+//					        
+//					        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+//					        userRepository.save(user);
+//					        
+//					        Map<String, String> response = new HashMap<>();
+//					        response.put("message", "Password reset successfully");
+//					        return ResponseEntity.ok(response);
+//					    } catch (Exception e) {
+//					        System.err.println("🔐 CONTROLLER ERROR: " + e.getMessage());
+//					        Map<String, String> error = new HashMap<>();
+//					        error.put("error", e.getMessage());
+//					        return ResponseEntity.badRequest().body(error);
+//					    }
+//					}
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+//					
+//					@PostMapping("/forgot-password")
+//					public ResponseEntity<?> forgotPassword(@Valid @RequestBody AuthRequest request) {
+//					    try {
+//					        System.out.println("🔥🔥🔥 CONTROLLER: Forgot password request received for: " + request.getUsername());
+//					        String resetToken = authService.generateResetToken(request.getUsername());
+//					        System.out.println("🔥🔥🔥 CONTROLLER: Generated Reset Token: " + resetToken);
+//					        
+//					        Map<String, Object> response = new HashMap<>();
+//					        response.put("resetToken", resetToken);
+//					        response.put("message", "Reset token generated. Check console for testing.");
+//					        response.put("resetLink", "index.html?token=" + resetToken);
+//					        return ResponseEntity.ok(response);
+//					    } catch (Exception e) {
+//					        System.err.println("🔥🔥🔥 CONTROLLER ERROR in forgot-password: " + e.getMessage());
+//					        e.printStackTrace();
+//					        Map<String, String> error = new HashMap<>();
+//					        error.put("error", e.getMessage());
+//					        return ResponseEntity.badRequest().body(error);
+//					    }
+//					}
+					
+
+					
+					
+					
+					
+					
+					
+			
+					
+					
+//					
+//					@PostMapping("/reset-password")
+//						public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest request){
 //							try {
-//						            System.out.println("🔥🔥🔥 CONTROLLER: Reset password request received");
+//					            System.out.println("🔥🔥🔥 CONTROLLER: Reset password request received");
 //						            System.out.println("🔥🔥🔥 CONTROLLER: Token: " + request.getToken());
 //						            System.out.println("🔥🔥🔥 CONTROLLER: New Password: " + request.getNewPassword());
 //
 //						            // Call service method to reset password
 //						            authService.resetPassword(request.getToken(), request.getNewPassword());
-//
 //							            Map<String, String> response = new HashMap<>();
 //							            response.put("message", "Password reset successfully");
 //
@@ -136,7 +234,7 @@ public class AuthController
 //								e.printStackTrace(); // Print full stack trace
 //								Map<String, String> error = new HashMap<>();
 //								error.put("error", e.getMessage());
-//								return ResponseEntity.badRequest().body(error);
+//							return ResponseEntity.badRequest().body(error);
 //							}
 //						}
 //						

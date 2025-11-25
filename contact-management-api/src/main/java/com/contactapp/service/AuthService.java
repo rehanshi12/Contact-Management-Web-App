@@ -207,8 +207,10 @@ public class AuthService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
+//        user.setSecurityQuestion(request.getSecurityQuestion());
+//        user.setSecurityAnswer(request.getSecurityAnswer().toLowerCase());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
+     
         user = userRepository.save(user);
 
         // Return DTO
@@ -216,7 +218,7 @@ public class AuthService {
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
-
+      
         return dto;
     }
 
@@ -261,6 +263,32 @@ public class AuthService {
         return resetToken;
     }
 
+//    
+//    public String generatePasswordResetToken(String username) {
+//        User user = userRepository.findByUsername(username)
+//            .orElseThrow(() -> new RuntimeException("User not found"));
+//        
+//        // Generate random token (36 character UUID)
+//        String token = UUID.randomUUID().toString();
+//        
+//        // Save token to user
+//        user.setResetToken(token);
+//        user.setTokenCreatedAt(System.currentTimeMillis()); // Store current time for expiry check
+//        userRepository.save(user);
+//        
+//        System.out.println("✅ Token saved for user: " + username + " | Token: " + token);
+//        return token;
+//    }
+//    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 		    @Transactional
 		    public void resetPassword(String token, String newPassword)
 		    {
@@ -293,5 +321,31 @@ public class AuthService {
 
 					        System.out.println("Password reset successful for user: " + user.getUsername());
 		    }
+		    
+		    
+		    
+		    //here new code 
+		    
+		    
+		    
+		    
+		    
+		    
+//		    
+//		    public User verifySecurityAnswer(String username, String answer) {
+//		        System.out.println("🔐 Verifying security answer for: " + username);
+//		        
+//		        User user = userRepository.findByUsername(username)
+//		            .orElseThrow(() -> new RuntimeException("User not found"));
+//		        
+//		        if(!user.getSecurityAnswer().equals(answer.toLowerCase())) {
+//		            throw new RuntimeException("Security answer is incorrect");
+//		        }
+//		        
+//		        System.out.println("✅ Security answer verified successfully");
+//		        return user;
+//		    }
+//		    
+		    
 }
 

@@ -1,0 +1,45 @@
+package com.contactapp.config;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Component
+public class CorsFilter extends OncePerRequestFilter {
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+
+        String origin = request.getHeader("Origin");
+        
+        if (isAllowedOrigin(origin)) {
+            response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+            response.setHeader("Access-Control-Expose-Headers", "Authorization, Content-Type");
+            response.setHeader("Access-Control-Allow-Credentials", "false");
+            response.setHeader("Access-Control-Max-Age", "7200");
+
+            // Handle preflight requests
+            if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+                response.setStatus(HttpServletResponse.SC_OK);
+                return;
+            }
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private boolean isAllowedOrigin(String origin) {
+        return origin != null && (
+            origin.equals("http://localhost:5500") ||
+            origin.equals("http://127.0.0.1:5500") ||
+            origin.equals("http://10.96.89.72:5500")
+        );
+    }
+}

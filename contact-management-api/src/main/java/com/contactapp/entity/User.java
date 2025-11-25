@@ -29,7 +29,24 @@ public class User {
     @Column(nullable = false)
     @NotBlank(message = "Password is required")
     private String password;
-
+    
+    
+    
+//    /here addd recent code   
+    
+//    
+//    @Column(nullable = false)
+//    @NotBlank(message = "select the question")
+//    private String securityQuestion;
+//     
+//    @Column(nullable = false)
+//    @NotBlank(message = "select the Answer")
+//    private String securityAnswer;
+//    
+    
+    
+    
+    
     @Column(unique = true)
     private String email;
 
@@ -60,6 +77,21 @@ public class User {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+    
+    
+    
+//  /here addd recent code   
+//    
+//    public String getSecurityQuestion() { return securityQuestion;}
+//    
+//    public void setSecurityQuestion(String securityQuestion) {this.securityQuestion = securityQuestion;}
+//    
+//    public String getSecurityAnswer() {  return securityAnswer;}
+//    
+//    public void setSecurityAnswer(String securityAnswer) { this.securityAnswer = securityAnswer;}
+    
+    
+    
 
     public String getResetToken() { return resetToken; }
     public void setResetToken(String resetToken) { this.resetToken = resetToken; }

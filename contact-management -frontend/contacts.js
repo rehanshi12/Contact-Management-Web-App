@@ -117,7 +117,7 @@ function createContactItem(contact) {
 
     const avatar = document.createElement('div');
     avatar.className = 'contact-avatar';
-    
+
     // Backend returns photoUrl field
     if (contact.photoUrl) {
         const img = document.createElement('img');
@@ -165,7 +165,7 @@ function openEditContactModal(contact) {
     document.getElementById('contactPhone').value = contact.phoneNo; // Backend uses phoneNo
     document.getElementById('contactEmail').value = contact.email || '';
     document.getElementById('contactGender').value = contact.gender || '';
-    
+
     if (contact.photoUrl) {
         const img = document.createElement('img');
         img.src = contact.photoUrl;
@@ -174,7 +174,7 @@ function openEditContactModal(contact) {
     } else {
         resetPhotoPreview();
     }
-    
+
     closeDetailsModal();
     contactModal.classList.add('active');
 }
@@ -224,7 +224,7 @@ async function saveContact(e) {
     formData.append('phoneNo', document.getElementById('contactPhone').value); // Backend uses phoneNo
     formData.append('email', document.getElementById('contactEmail').value || '');
     formData.append('gender', document.getElementById('contactGender').value || '');
-    
+
     // Add photo if selected
     if (selectedPhoto) {
         formData.append('photo', selectedPhoto);
@@ -249,16 +249,18 @@ async function saveContact(e) {
                 API_CONFIG.ENDPOINTS.CONTACTS,
                 formData,
                 'POST'
+      
             );
+
         }
 
         if (response.ok) {
             const data = await response.json();
             console.log('Contact saved:', data);
-            
+
             await loadContacts();
             closeContactModal();
-            
+
             // Show success message
             alert(data.message || 'Contact saved successfully!');
         } else {
@@ -276,13 +278,13 @@ async function saveContact(e) {
 
 function showContactDetails(contact) {
     const detailsDiv = document.getElementById('contactDetails');
-    
+
     detailsDiv.innerHTML = `
         <div class="details-photo">
             <div class="details-photo-avatar">
-                ${contact.photoUrl 
-                    ? `<img src="${contact.photoUrl}" alt="${contact.name}">` 
-                    : contact.name.charAt(0).toUpperCase()}
+                ${contact.photoUrl
+            ? `<img src="${contact.photoUrl}" alt="${contact.name}">`
+            : contact.name.charAt(0).toUpperCase()}
             </div>
         </div>
         <div class="details-info">
