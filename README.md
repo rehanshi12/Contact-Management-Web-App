@@ -109,7 +109,7 @@ Search Bar in Action
 
 Email verification
 
-OTP or token-based password reset
+OTP or token-based password reset<br>
 🔹 Add profile photo upload for user accounts<br>
 🔹 Add contact categories & filtering (Family, Friends, Work, etc.)<br>
 🔹 Add pagination for large contact lists<br>
@@ -118,11 +118,11 @@ OTP or token-based password reset
 
 
 📧 Contact
-If you like this project or want to collaborate, feel free to reach out!
+If you like this project or want to collaborate, feel free to reach out!<br>
 📩 rehanshaikh17775@gmail.com
 
 
-🏁 Conclusion
+🏁 Conclusion<br>
 The Contact Management Web App demonstrates a real-world full-stack development workflow.
 It covers everything from frontend UI building to secure backend development, making it an excellent project for improving your skills and showcasing your abilities in the industry.
 This project is ideal for learning:
