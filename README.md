@@ -77,8 +77,6 @@ Organizing full-stack project structure
 
 🖼️ Screenshots
 
-(Add your screenshots here to make the README more attractive.)
-
 You can include images like:
 
 Login Page
@@ -112,11 +110,11 @@ Search Bar in Action
 Email verification
 
 OTP or token-based password reset
-🔹 Add profile photo upload for user accounts
-🔹 Add contact categories & filtering (Family, Friends, Work, etc.)
-🔹 Add pagination for large contact lists
-🔹 Add theme switcher (light/dark mode)
-🔹 Deploy app to cloud (Render / Railway / AWS EC2)
+🔹 Add profile photo upload for user accounts<br>
+🔹 Add contact categories & filtering (Family, Friends, Work, etc.)<br>
+🔹 Add pagination for large contact lists<br>
+🔹 Add theme switcher (light/dark mode)<br>
+🔹 Deploy app to cloud (Render / Railway / AWS EC2)<br>
 
 
 📧 Contact
